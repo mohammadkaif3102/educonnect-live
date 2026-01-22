@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduConnect - Study Together</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.1/fabric.min.js"></script>
+</head>
+<body>
+
+    <div id="login-screen" class="screen">
+        <h1>🎓 EduConnect</h1>
+        <p>Login karke padhai shuru karein.</p>
+        <button onclick="loginWithGoogle()" class="btn-primary">Google Login</button>
+    </div>
+
+    <div id="dashboard-screen" class="screen" style="display:none;">
+        <nav>
+            <h2>EduConnect</h2>
+            <span id="user-name">User</span>
+        </nav>
+        <div class="content">
+            <h3>Naya topic shuru karein:</h3>
+            <div style="margin-bottom: 20px;">
+                <input type="text" id="room-input" placeholder="Topic (e.g. ML, Physics)">
+                <button onclick="joinStudyRoom()" class="btn-primary">Create Room</button>
+            </div>
+
+            <hr>
+            
+            <h3>Currently Active Groups 🟢</h3>
+            <p>Koi bhi group select karke join karein:</p>
+            <div id="active-rooms-list" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;">
+                <p style="color: gray;">Abhi koi active room nahi hai.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="room-screen" class="screen" style="display:none;">
+        <div class="room-header">
+            <h3 id="current-room-id">Topic</h3>
+            <button onclick="leaveRoom()" class="btn-danger">Leave</button>
+        </div>
+        
+        <div class="main-body">
+            <div id="video-grid"></div>
+            
+            <div class="whiteboard-area">
+                <canvas id="whiteboard" width="600" height="400"></canvas>
+                <div class="tools">
+                    <button onclick="changeColor('black')">✏️ Black</button>
+                    <button onclick="changeColor('red')">✏️ Red</button>
+                    <button onclick="changeColor('blue')">✏️ Blue</button>
+                    <button onclick="clearBoard()">🧹 Clear</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="script.js"></script>
+</body>
+</html>
